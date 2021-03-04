@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import {
-	getLocalStorage,
-	setLocalStorage,
-} from './Components/Utils/ls-utils.js';
+import { setLocalStorage } from './Components/Utils/local-utils.js';
 import './App.css';
 import PrivateRoute from './Components/PrivateRoute.js';
 import Header from './Components/Header/Header.js';
 import HomePage from './HomePage/HomePage.js';
+import AboutPage from './AboutPage/AboutPage.js';
 import AuthPage from './AuthPage/AuthPage.js';
 import AccountDash from './AccountDash/AccountDash.js';
 import SearchPage from './SearchPage/SearchPage.js';
 import BookmarksPage from './BookmarksPage/BookmarksPage.js';
 export default class App extends Component {
 	state = {
-		token: getLocalStorage(),
+		user: {
+			name: '',
+			token: '',
+		},
 	};
-
-	handleTokenChange = (token) => {
-		this.setState({ token });
-
-		setLocalStorage(token);
+	handleUserChange = (user) => {
+		this.setState({
+			user: user,
+		});
+		setLocalStorage(user);
 	};
 
 	render() {
@@ -49,14 +50,24 @@ export default class App extends Component {
 					<Route
 						path='/myaccount/signup'
 						exact
-						token={token}
-						render={(routerProps) => <AuthPage {...routerProps} />}
+						render={(routerProps) => (
+							<AuthPage
+								token={token}
+								handleUserChange={this.handleUserChange}
+								{...routerProps}
+							/>
+						)}
 					/>
 					<Route
 						path='/myaccount/signin'
 						exact
-						token={token}
-						render={(routerProps) => <AuthPage {...routerProps} />}
+						render={(routerProps) => (
+							<AuthPage
+								token={token}
+								handleUserChange={this.handleUserChange}
+								{...routerProps}
+							/>
+						)}
 					/>
 
 					<PrivateRoute
@@ -75,6 +86,12 @@ export default class App extends Component {
 						render={(routerProps) => (
 							<BookmarksPage {...routerProps} />
 						)}
+					/>
+
+					<Route
+						path='/about'
+						exact
+						render={(routerProps) => <AboutPage {...routerProps} />}
 					/>
 				</Switch>
 			</Router>
