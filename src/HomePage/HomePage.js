@@ -5,12 +5,8 @@ import { loginUser, createUser } from '../Components/Utils/api-utils.js';
 import './HomePage.css';
 
 export default class HomePage extends Component {
-	handleFormSubmit = (user) => {
-		this.props.handleUserChange(user);
-
-		this.props.history.push('/myaccount/dashboard');
-	};
 	render() {
+		const { handleUserChange, routerprops } = this.props;
 		return (
 			<main className='homePage'>
 				<h1>Welcome to AstroNews!</h1>
@@ -21,6 +17,8 @@ export default class HomePage extends Component {
 							label='login'
 							auth={loginUser}
 							legend='Existing Account'
+							handleUserChange={handleUserChange}
+							{...routerprops}
 							handleFormSubmit={this.handleFormSubmit}
 						/>
 					</content>
@@ -30,6 +28,7 @@ export default class HomePage extends Component {
 							label='signup'
 							auth={createUser}
 							legend='Create Account'
+							handleUserChange={handleUserChange}
 							handleFormSubmit={this.handleFormSubmit}
 						/>
 					</content>

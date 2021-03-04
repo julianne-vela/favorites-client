@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { setLocalStorage } from './Components/Utils/local-utils.js';
+import {
+	getLocalStorage,
+	setLocalStorage,
+} from './Components/Utils/local-utils.js';
 import './App.css';
 import PrivateRoute from './Components/PrivateRoute.js';
 import Header from './Components/Header/Header.js';
@@ -11,10 +14,7 @@ import SearchPage from './SearchPage/SearchPage.js';
 import BookmarksPage from './BookmarksPage/BookmarksPage.js';
 export default class App extends Component {
 	state = {
-		user: {
-			name: '',
-			token: '',
-		},
+		user: getLocalStorage(),
 	};
 	handleUserChange = (user) => {
 		this.setState({
@@ -24,7 +24,7 @@ export default class App extends Component {
 	};
 
 	render() {
-		const { token } = this.state;
+		const { token } = this.state.user;
 
 		return (
 			<Router>
