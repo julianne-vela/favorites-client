@@ -6,7 +6,6 @@ import PrivateRoute from './Components/PrivateRoute.js';
 import Header from './Components/Header/Header.js';
 import HomePage from './HomePage/HomePage.js';
 import AboutPage from './AboutPage/AboutPage.js';
-import AuthPage from './AuthPage/AuthPage.js';
 import AccountDash from './AccountDash/AccountDash.js';
 import SearchPage from './SearchPage/SearchPage.js';
 import BookmarksPage from './BookmarksPage/BookmarksPage.js';
@@ -34,8 +33,13 @@ export default class App extends Component {
 					<Route
 						path='/'
 						exact
-						token={token}
-						render={(routerProps) => <HomePage {...routerProps} />}
+						render={(routerProps) => (
+							<HomePage
+								token={token}
+								handleUserChange={this.handleUserChange}
+								{...routerProps}
+							/>
+						)}
 					/>
 
 					<PrivateRoute
@@ -44,29 +48,6 @@ export default class App extends Component {
 						token={token}
 						render={(routerProps) => (
 							<AccountDash {...routerProps} />
-						)}
-					/>
-
-					<Route
-						path='/myaccount/signup'
-						exact
-						render={(routerProps) => (
-							<AuthPage
-								token={token}
-								handleUserChange={this.handleUserChange}
-								{...routerProps}
-							/>
-						)}
-					/>
-					<Route
-						path='/myaccount/signin'
-						exact
-						render={(routerProps) => (
-							<AuthPage
-								token={token}
-								handleUserChange={this.handleUserChange}
-								{...routerProps}
-							/>
 						)}
 					/>
 

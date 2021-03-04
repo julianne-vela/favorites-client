@@ -17,7 +17,7 @@ export async function loginUser(email, password) {
 	return response.body;
 }
 
-const apiURL = 'https://spaceflightnewsapi.net/api/v2';
+const apiURL = 'https://test.spaceflightnewsapi.net/api/v2';
 // https://test.spaceflightnewsapi.net/api/v2/articles?_limit=25&_contains=rover
 // SEARCH 3RD PARTY API FOR CONTENT //
 export async function getContent(contentType, query) {
