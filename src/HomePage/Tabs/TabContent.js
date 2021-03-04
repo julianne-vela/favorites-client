@@ -8,15 +8,11 @@ export default class TabContent extends Component {
 
 	handleSubmit = async (e) => {
 		e.preventDefault();
-
 		const user = await this.props.auth(
 			this.state.email,
 			this.state.password
 		);
-
-		this.props.handleUserChange(user);
-
-		this.props.history.push('/myaccount/dashboard');
+		this.props.handleFormSubmit(user);
 	};
 	render() {
 		const { legend } = this.props;

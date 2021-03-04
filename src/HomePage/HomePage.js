@@ -5,6 +5,11 @@ import { loginUser, createUser } from '../Components/Utils/api-utils.js';
 import './HomePage.css';
 
 export default class HomePage extends Component {
+	handleFormSubmit = (user) => {
+		this.props.handleUserChange(user);
+
+		this.props.history.push('/myaccount/dashboard');
+	};
 	render() {
 		const { handleUserChange, routerprops } = this.props;
 		return (
