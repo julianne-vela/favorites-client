@@ -2,11 +2,16 @@ export const USER = 'USER';
 
 export function getLocalStorage() {
 	const rawUser = localStorage.getItem(USER);
-	const parsedUser = JSON.parse(rawUser);
-
-	return parsedUser;
+	try {
+		return JSON.parse(rawUser);
+	} catch (e) {
+		return {
+			email: '',
+			id: '',
+			token: '',
+		};
+	}
 }
-
 export function setLocalStorage(user) {
 	localStorage.setItem(USER, JSON.stringify(user));
 }

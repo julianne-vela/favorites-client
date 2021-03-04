@@ -4,26 +4,29 @@ import './Header.css';
 
 export default class Header extends Component {
 	render() {
-		const { token } = this.props;
+		const { user, handleLogout } = this.props;
 
 		return (
 			<header className='header'>
 				<h3 className='headerTitle'>AstroNews</h3>
 				<nav className='navBar'>
-					<NavLink to={'/'}>Home</NavLink>
-					{!token ? (
+					{user && user.token ? (
 						<>
-							<NavLink to={'/myaccount/signup'}>Sign Up</NavLink>
-							<NavLink to={'/myaccount/signin'}>Sign In</NavLink>
+							<NavLink to={'/myaccount/dashboard'}>
+								My Account
+							</NavLink>
+							<NavLink to={'/bookmarks'}>Bookmarks</NavLink>
+							<button onClick={handleLogout}>Logout</button>
 						</>
 					) : (
-						<>
-							<NavLink to={'/myaccount/dashboard'}></NavLink>
-							<NavLink to={'/search'}>Search</NavLink>
-							<NavLink to={'/bookmarks'}>Bookmarks</NavLink>
-						</>
+						(!user || !user.token) && (
+							<>
+								<NavLink to={'/'}>Home</NavLink>
+								<NavLink to={'/search'}>Search</NavLink>
+								<NavLink to={'/about'}>About</NavLink>
+							</>
+						)
 					)}
-					<NavLink to={'/about'}>About</NavLink>
 				</nav>
 			</header>
 		);

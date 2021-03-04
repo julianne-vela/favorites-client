@@ -23,19 +23,28 @@ export default class App extends Component {
 		setLocalStorage(user);
 	};
 
+	handleLogout = () => {
+		localStorage.clear();
+		this.setState({
+			user: {
+				email: '',
+				id: '',
+				token: '',
+			},
+		});
+	};
 	render() {
-		const { token } = this.state.user;
-
+		const { user } = this.state;
 		return (
 			<Router>
-				<Header />
+				<Header user={user} handleLogout={this.handleLogout} />
 				<Switch>
 					<Route
 						path='/'
 						exact
 						render={(routerProps) => (
 							<HomePage
-								token={token}
+								token={user.token}
 								handleUserChange={this.handleUserChange}
 								{...routerProps}
 							/>
@@ -45,7 +54,7 @@ export default class App extends Component {
 					<PrivateRoute
 						path='/myaccount/dashboard'
 						exact
-						token={token}
+						token={user.token}
 						render={(routerProps) => (
 							<AccountDash {...routerProps} />
 						)}
@@ -54,7 +63,7 @@ export default class App extends Component {
 					<PrivateRoute
 						path='/search'
 						exact
-						token={token}
+						token={user.token}
 						render={(routerProps) => (
 							<SearchPage {...routerProps} />
 						)}
@@ -63,7 +72,7 @@ export default class App extends Component {
 					<PrivateRoute
 						path='/bookmarks'
 						exact
-						token={token}
+						token={user.token}
 						render={(routerProps) => (
 							<BookmarksPage {...routerProps} />
 						)}
