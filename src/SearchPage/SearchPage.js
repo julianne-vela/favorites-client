@@ -28,16 +28,19 @@ export default class SearchPage extends Component {
 	};
 
 	handleBookmark = async (article) => {
-		await addBookmark(this.state.user.token, article);
-		const bookmarks = await getBookmarks(this.state.user.token);
+		await addBookmark(this.props.token, article);
+		const bookmarks = await getBookmarks(this.props.token);
 		this.setState({ bookmarks });
 	};
 
 	checkBookmarks = (article) => {
-		const bookmarked = this.state.bookmarks.some((i) => {
-			return i.articleId === article.id;
-		});
-		return bookmarked;
+		if (!this.props.token) return true;
+
+		const bookmarked = this.state.bookmarks.find(
+			(bookmark) => bookmark.article_id === article.id
+		);
+
+		return Boolean(bookmarked);
 	};
 
 	render() {
@@ -68,7 +71,9 @@ export default class SearchPage extends Component {
 							) : (
 								<button
 									className='bookmarkBtn'
-									onClick={this.handleBookmark}>
+									onClick={() =>
+										this.handleBookmark(article)
+									}>
 									Add to your Bookmarks
 								</button>
 							)}
