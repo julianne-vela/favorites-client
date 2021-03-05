@@ -33,8 +33,16 @@ export default class App extends Component {
 			},
 		});
 	};
+
 	render() {
 		const { user } = this.state;
+		const tempUser = {
+			email: 'newemail@email.com',
+			id: 1,
+			token: 'atggsa54agsdaasg45ga',
+		};
+		setLocalStorage(tempUser);
+		console.log(user);
 		return (
 			<div className='App'>
 				<Router>
