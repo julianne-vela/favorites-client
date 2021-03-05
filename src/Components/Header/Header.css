@@ -1,0 +1,10 @@
+.header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0%;
+}
+
+.navBar > a {
+	padding: 10px;
+}

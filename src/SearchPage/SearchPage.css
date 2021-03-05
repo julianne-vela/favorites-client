@@ -1,0 +1,57 @@
+.searchPage {
+	border: 5px green solid;
+	display: grid;
+	gap: 5px;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: 0.5fr repeat(6, 1fr);
+	grid-template-areas:
+		'sTitle sTitle sTitle'
+		'sideBar articles articles'
+		'sideBar articles articles'
+		'sideBar articles articles'
+		'sideBar articles articles'
+		'sideBar articles articles';
+	width: auto;
+	height: fit-content;
+}
+
+.sTitle {
+	display: flex;
+	grid-area: sTitle;
+}
+
+section.articles {
+	border: 5px blue solid;
+	grid-area: articles;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width: auto;
+	height: 900px;
+	overflow-y: scroll;
+	padding: 5px;
+}
+
+.articleContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	width: 600px;
+	height: 500px;
+	border: 1px solid black;
+	padding: 5px;
+	margin: 5px;
+}
+
+.articleContainer > img {
+	width: 400px;
+	height: 300px;
+}
+
+.sideBar {
+	border: 5px solid teal;
+	display: flex;
+	grid-area: sideBar;
+	width: auto;
+}
