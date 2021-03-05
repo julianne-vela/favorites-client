@@ -36,55 +36,59 @@ export default class App extends Component {
 	render() {
 		const { user } = this.state;
 		return (
-			<Router>
-				<Header user={user} handleLogout={this.handleLogout} />
-				<Switch>
-					<Route
-						path='/'
-						exact
-						render={(routerProps) => (
-							<HomePage
-								token={user.token}
-								handleUserChange={this.handleUserChange}
-								{...routerProps}
-							/>
-						)}
-					/>
+			<div className='App'>
+				<Router>
+					<Header user={user} handleLogout={this.handleLogout} />
+					<Switch>
+						<Route
+							path='/'
+							exact
+							render={(routerProps) => (
+								<HomePage
+									token={user.token}
+									handleUserChange={this.handleUserChange}
+									{...routerProps}
+								/>
+							)}
+						/>
 
-					<PrivateRoute
-						path='/myaccount/dashboard'
-						exact
-						token={user.token}
-						render={(routerProps) => (
-							<AccountDash {...routerProps} />
-						)}
-					/>
+						<PrivateRoute
+							path='/myaccount/dashboard'
+							exact
+							token={user.token}
+							render={(routerProps) => (
+								<AccountDash {...routerProps} />
+							)}
+						/>
 
-					<PrivateRoute
-						path='/search'
-						exact
-						token={user.token}
-						render={(routerProps) => (
-							<SearchPage {...routerProps} />
-						)}
-					/>
+						<PrivateRoute
+							path='/search'
+							exact
+							token={user.token}
+							render={(routerProps) => (
+								<SearchPage user={user} {...routerProps} />
+							)}
+						/>
 
-					<PrivateRoute
-						path='/bookmarks'
-						exact
-						token={user.token}
-						render={(routerProps) => (
-							<BookmarksPage {...routerProps} />
-						)}
-					/>
+						<PrivateRoute
+							path='/bookmarks'
+							exact
+							token={user.token}
+							render={(routerProps) => (
+								<BookmarksPage {...routerProps} />
+							)}
+						/>
 
-					<Route
-						path='/about'
-						exact
-						render={(routerProps) => <AboutPage {...routerProps} />}
-					/>
-				</Switch>
-			</Router>
+						<Route
+							path='/about'
+							exact
+							render={(routerProps) => (
+								<AboutPage {...routerProps} />
+							)}
+						/>
+					</Switch>
+				</Router>
+			</div>
 		);
 	}
 }

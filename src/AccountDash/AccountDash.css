@@ -1,0 +1,67 @@
+.accountDash {
+	display: grid;
+	width: auto;
+	height: auto;
+	content: '';
+	gap: 5px;
+	align-items: center;
+	justify-content: center;
+	margin: 0%;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-template-rows: repeat(6, 1fr);
+	grid-template-areas:
+		'title title title title title title'
+		'sideBar sideBar content content content content'
+		'sideBar sideBar content content content content'
+		'sideBar sideBar content content content content'
+		'sideBar sideBar content content content content'
+		'sideBar sideBar content content content content';
+}
+
+.title {
+	border: 5px solid magenta;
+	grid-area: title;
+	text-align: center;
+	font-family: 'Astro Space';
+	font-size: 2rem;
+	margin: 0;
+}
+
+.sideBar {
+	border: 5px solid gold;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	grid-area: sideBar;
+	height: 100%;
+	width: auto;
+}
+
+.content {
+	height: 100%;
+	width: auto;
+	border: 5px solid blue;
+	grid-area: content;
+}
+
+.apodCard {
+	border: 5px solid green;
+	display: flex;
+	flex-direction: column;
+	height: 66%;
+}
+
+.apodCard > img {
+	height: 40%;
+	width: 80%;
+}
+
+.astroRes {
+	border: 5px solid turquoise;
+	display: flex;
+	height: 33%;
+}
