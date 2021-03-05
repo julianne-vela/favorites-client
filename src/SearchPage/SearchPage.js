@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import './SearchPage.css';
-import { getContent } from '../Components/Utils/api-utils';
+import {
+	addBookmark,
+	getBookmarks,
+	getContent,
+} from '../Components/Utils/api-utils';
 import { getLocalStorage } from '../Components/Utils/local-utils';
 
 export default class SearchPage extends Component {
@@ -21,6 +25,19 @@ export default class SearchPage extends Component {
 		);
 
 		this.setState({ articles });
+	};
+
+	handleBookmark = async (article) => {
+		await addBookmark(this.state.user.token, article);
+		const bookmarks = await getBookmarks(this.state.user.token);
+		this.setState({ bookmarks });
+	};
+
+	checkBookmarks = (article) => {
+		const bookmarked = this.state.bookmarks.some((i) => {
+			return i.articleId === article.id;
+		});
+		return bookmarked;
 	};
 
 	render() {
@@ -44,9 +61,17 @@ export default class SearchPage extends Component {
 							<a href={`${article.url}`}>
 								Read full article here at {article.newsSite}.
 							</a>
-							<button className='bookmarkBtn'>
-								Add to your Bookmarks
-							</button>
+							{this.checkBookmarks(article) ? (
+								<p>
+									<em>Already Bookmarked!</em>
+								</p>
+							) : (
+								<button
+									className='bookmarkBtn'
+									onClick={this.handleBookmark}>
+									Add to your Bookmarks
+								</button>
+							)}
 						</article>
 					))}
 				</section>
