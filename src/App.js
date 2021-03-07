@@ -17,18 +17,18 @@ export default class App extends Component {
 		user: getLocalStorage(),
 		token: '',
 	};
-	
-    componentDidMount = () => {
-        setLocalStorage({
+
+	componentDidMount = () => {
+		setLocalStorage({
 			user: {
 				email: '',
 				id: '',
 				token: '',
 			},
 		});
-    }
-    
-    handleUserChange = (user) => {
+	};
+
+	handleUserChange = (user) => {
 		this.setState({
 			user: user,
 		});
@@ -43,7 +43,7 @@ export default class App extends Component {
 		// 		id: '',
 		// 		token: '',
 		// 	},
-		});
+		// });
 	};
 
 	render() {
@@ -71,14 +71,14 @@ export default class App extends Component {
 							exact
 							token={token}
 							render={(routerProps) => (
-								<AccountDash {...routerProps} />
+								<AccountDash user={user} {...routerProps} />
 							)}
 						/>
 
 						<PrivateRoute
 							path='/search'
 							exact
-							token={user.token}
+							token={token}
 							render={(routerProps) => (
 								<SearchPage user={user} {...routerProps} />
 							)}
@@ -87,9 +87,9 @@ export default class App extends Component {
 						<PrivateRoute
 							path='/bookmarks'
 							exact
-							token={user.token}
+							token={token}
 							render={(routerProps) => (
-								<BookmarksPage {...routerProps} />
+								<BookmarksPage user={user} {...routerProps} />
 							)}
 						/>
 
