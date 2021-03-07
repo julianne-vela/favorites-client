@@ -15,6 +15,7 @@ import BookmarksPage from './BookmarksPage/BookmarksPage.js';
 export default class App extends Component {
 	state = {
 		user: getLocalStorage(),
+		token: '',
 	};
 	handleUserChange = (user) => {
 		this.setState({
