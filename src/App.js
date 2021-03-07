@@ -36,14 +36,8 @@ export default class App extends Component {
 	};
 
 	render() {
-		const { user } = this.state;
-		const tempUser = {
-			email: 'newemail@email.com',
-			id: 1,
-			token: 'atggsa54agsdaasg45ga',
-		};
-		setLocalStorage(tempUser);
-		console.log(user);
+		const { user, token } = this.state;
+
 		return (
 			<div className='App'>
 				<Router>
@@ -64,7 +58,7 @@ export default class App extends Component {
 						<PrivateRoute
 							path='/myaccount/dashboard'
 							exact
-							token={user.token}
+							token={token}
 							render={(routerProps) => (
 								<AccountDash {...routerProps} />
 							)}
