@@ -37,22 +37,16 @@ export default class App extends Component {
 
 	handleLogout = () => {
 		localStorage.clear();
-		// this.setState({
-		// 	user: {
-		// 		email: '',
-		// 		id: '',
-		// 		token: '',
-		// 	},
-		// });
+		this.history.push('/');
 	};
 
 	render() {
-		const { user, token } = this.state;
+		const { token } = this.state.user;
 
 		return (
 			<div className='App'>
 				<Router>
-					<Header user={user} handleLogout={this.handleLogout} />
+					<Header token={token} handleLogout={this.handleLogout} />
 					<Switch>
 						<Route
 							path='/'
@@ -71,7 +65,7 @@ export default class App extends Component {
 							exact
 							token={token}
 							render={(routerProps) => (
-								<AccountDash user={user} {...routerProps} />
+								<AccountDash {...routerProps} />
 							)}
 						/>
 
@@ -80,7 +74,7 @@ export default class App extends Component {
 							exact
 							token={token}
 							render={(routerProps) => (
-								<SearchPage user={user} {...routerProps} />
+								<SearchPage {...routerProps} />
 							)}
 						/>
 
@@ -89,7 +83,7 @@ export default class App extends Component {
 							exact
 							token={token}
 							render={(routerProps) => (
-								<BookmarksPage user={user} {...routerProps} />
+								<BookmarksPage {...routerProps} />
 							)}
 						/>
 

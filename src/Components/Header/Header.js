@@ -21,7 +21,9 @@ export default class Header extends Component {
 						</>
 					)}
 					<NavLink to={'/about'}>About</NavLink>
-					<button onClick={handleLogout}>Logout</button>
+					{user && user.token && (
+						<button onClick={handleLogout}>Logout</button>
+					)}
 				</nav>
 			</header>
 		);
