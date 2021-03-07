@@ -17,7 +17,18 @@ export default class App extends Component {
 		user: getLocalStorage(),
 		token: '',
 	};
-	handleUserChange = (user) => {
+	
+    componentDidMount = () => {
+        setLocalStorage({
+			user: {
+				email: '',
+				id: '',
+				token: '',
+			},
+		});
+    }
+    
+    handleUserChange = (user) => {
 		this.setState({
 			user: user,
 		});
@@ -26,13 +37,13 @@ export default class App extends Component {
 
 	handleLogout = () => {
 		localStorage.clear();
-		this.setState({
-			user: {
-				email: '',
-				id: '',
-				token: '',
-			},
-		});
+		// this.setState({
+		// 	user: {
+		// 		email: '',
+		// 		id: '',
+		// 		token: '',
+		// 	},
+		// });
 	};
 
 	render() {
