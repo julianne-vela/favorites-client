@@ -59,7 +59,7 @@ export default class App extends Component {
 							exact
 							render={(routerProps) => (
 								<HomePage
-									token={user.token}
+									token={token}
 									handleUserChange={this.handleUserChange}
 									{...routerProps}
 								/>
