@@ -6,9 +6,9 @@ export function getLocalStorage() {
 		return JSON.parse(rawUser);
 	} catch (e) {
 		return {
-			email: 'tempuser@temp.com',
-			id: '0',
-			token: 'tempusertoken',
+			email: '',
+			id: '',
+			token: '',
 		};
 	}
 }
